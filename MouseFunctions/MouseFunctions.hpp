@@ -67,10 +67,14 @@
     # ifndef SYNESTIA_GRAPHICS_POLYGON
         # include "Polygon.hpp"
     # endif // SYNESTIA_GRAPHICS_POLYGON
-    //-- Include Triangle
-    # ifndef SYNESTIA_GRAPHICS_TRIANGLE
-        # include "Triangle.hpp"
-    # endif // SYNESTIA_GRAPHICS_TRIANGLE
+    //-- Include Point
+    # ifndef SYNESTIA_GRAPHICS_POINT
+        # include "Point.hpp"
+    # endif // SYNESTIA_GRAPHICS_POINT
+    //-- Include Text
+    # ifndef SYNESTIA_GRAPHICS_TEXT
+        # include "Text.hpp"
+    # endif // SYNESTIA_GRAPHICS_TEXT
     //-- Include Thread Library
     # ifndef _GLIBCXX_THREAD
         # include <thread>
@@ -84,19 +88,28 @@
         # include <deque>
     # endif // _GLIBCXX_DEQUE
     /**
-     * @brief Ramtin Kosari's Mouse Function Type
-     * @enum RKMouseFunctionType
-     * @note This Enum Defines Different Types of Mouse Functions
-     * @param RK_MOUSE_FUNCTION_CIRCLE_TEST Test Mouse Function
-     * @param RK_MOUSE_FUNCTION_CIRCLE_RADIUS Circle Radius Mouse Function
-     * @param RK_MOUSE_FUNCTION_LINE_THICKNESS Line Thickness Mouse Function
-     * @param RK_MOUSE_FUNCTION_RECTANGLE_THICKNESS Rectangle Thickness Mouse Function
+     * @brief RK Mouse Functions Window Sections
+     * @enum RKMouseFunctionsWinSections
+     * @param RK_MOUSE_FUNCTIONS_WINDOW_SECTION_TOOLBAR Toolbar Section
+     * @param RK_MOUSE_FUNCTIONS_WINDOW_SECTION_CANVAS Canvas Section
      */
-    enum RKMouseFunctionType {
-        RK_MOUSE_FUNCTION_CIRCLE_TEST,
-        RK_MOUSE_FUNCTION_CIRCLE_RADIUS,
-        RK_MOUSE_FUNCTION_LINE_THICKNESS,
-        RK_MOUSE_FUNCTION_RECTANGLE_THICKNESS
+    enum RKMouseFunctionsWinSections {
+        RK_MOUSE_FUNCTIONS_WINDOW_SECTION_TOOLBAR,
+        RK_MOUSE_FUNCTIONS_WINDOW_SECTION_CANVAS
+    };
+    /**
+     * @brief RK Mouse Functions Draw Modes
+     * @enum RKMouseFunctionsDrawModes
+     * @param RK_MOUSE_FUNCTIONS_DRAW_MODE_NONE No Draw Mode
+     * @param RK_MOUSE_FUNCTIONS_DRAW_MODE_LINE Line Draw Mode
+     * @param RK_MOUSE_FUNCTIONS_DRAW_MODE_RECTANGLE Rectangle Draw Mode
+     * @param RK_MOUSE_FUNCTIONS_DRAW_MODE_CIRCLE Circle Draw Mode
+     */
+    enum RKMouseFunctionsDrawModes {
+        RK_MOUSE_FUNCTIONS_DRAW_MODE_NONE,
+        RK_MOUSE_FUNCTIONS_DRAW_MODE_LINE,
+        RK_MOUSE_FUNCTIONS_DRAW_MODE_RECTANGLE,
+        RK_MOUSE_FUNCTIONS_DRAW_MODE_CIRCLE
     };
     /**
      * @brief Class to Handle Mouse Functions
@@ -114,18 +127,42 @@
              */
             RKMouseFunctions();
             /**
-             * @brief Construct a New Mouse Functions Object
-             * @param type Mouse Function Type
+             * @brief Method to Draw Tool Bar
              */
-            RKMouseFunctions(int type);
+            void drawToolBar();
+            /**
+             * @brief Method to Handle Mouse
+             * @note This Method is Used to Bind Mouse Inside the Window
+             */
+            void handleMousePos();
+            /**
+             * @brief Method to Show Mouse Points
+             */
+            void showMousePoints();
+            /**
+             * @brief Method to Handle Draw Mode by Clicking on Toolbar
+             */
+            void handleDrawMode();
+            /**
+             * @brief Current Draw Mode
+             */
+            RKMouseFunctionsDrawModes draw_mode;
             /**
              * @brief First and Second Points
              */
-            RKGPoint first, second;
+            RKGPoint mouse_window, mouse_toolbar, first, second;
+            /**
+             * @brief Line, Rectangle, and Circle Sections
+             */
+            RKGSection sec_line, sec_rect, sec_circle;
+            /**
+             * @brief Current Mouse Functions Window Section
+             */
+            RKMouseFunctionsWinSections section;
             /**
              * @brief Distance between First and Second Points
              */
-            int distance;
+            int distance, distance2;
             /**
              * @brief Amount of Points
              * @note This is Used for Points to Create Circle
@@ -139,10 +176,26 @@
             /**
              * @brief Relative X of Second Point to First Point
              */
-            int x_rel;
+            int x_rel, x_rel2;
             /**
              * @brief Relative Y of Second Point to First Point
              */
-            int y_rel;
+            int y_rel, y_rel2;
+            /**
+             * @brief Mouse Pressed Flag
+             */
+            bool mouse_pressed, new_click;
+            /**
+             * @brief Start and End Draw Points
+             */
+            RKGPoint start_draw_point, end_draw_point;
+            /**
+             * @brief Status of Start and End Draw Points
+             */
+            bool status_start, status_end;
+            /**
+             * @brief Lines Thickness
+             */
+            float thickness;
     };
 # endif // RK_GRAPHICS_PROJECT_5
