@@ -3,6 +3,7 @@
      * @file Configs5.hpp
      * @author Ramtin Kosari (ramtinkosari@gmail.com)
      * @brief Configuration File for Mouse Functions
+     * @def RK_GRAPHICS_PROJECT_5_CONFIGS
      * @date 2024-11-14
      */
     # define RK_GRAPHICS_PROJECT_5_CONFIGS

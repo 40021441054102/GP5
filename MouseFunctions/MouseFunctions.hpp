@@ -196,6 +196,6 @@
             /**
              * @brief Lines Thickness
              */
-            float thickness;
+            float thickness = 1.0;
     };
 # endif // RK_GRAPHICS_PROJECT_5
